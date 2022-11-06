@@ -9,8 +9,10 @@ export const axiosInstance = axios.create();
 const strapiAuthHelper = AuthHelper(API_URL + "/api");
 
 export const authProvider: AuthProvider = {
-  login: async ({ username, password }) => {
-    const { data, status } = await strapiAuthHelper.login(username, password);
+  login: async ({ email, username, password }) => {
+    const user = email || username
+
+    const { data, status } = await strapiAuthHelper.login(user, password);
     if (status === 200) {
       localStorage.setItem(TOKEN_KEY, data.jwt);
 

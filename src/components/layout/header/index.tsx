@@ -7,7 +7,7 @@ const { Text } = Typography;
 export const Header: React.FC = () => {
   const { data: user } = useGetIdentity();
 
-  const shouldRenderHeader = user && (user.name || user.avatar);
+  const shouldRenderHeader = user && (user.username || user.avatar);
 
   return shouldRenderHeader ? (
     <AntdLayout.Header
@@ -21,14 +21,17 @@ export const Header: React.FC = () => {
       }}
     >
       <Space>
-        {user.name && (
-          <Text ellipsis strong>
-            {user.name}
-          </Text>
+        {user.username && (
+          <>
+            <Text ellipsis strong>
+              {user.username}
+            </Text>
+            <Avatar size="large" src={`https://ui-avatars.com/api/?name=` + user.username} />
+          </>
         )}
-        {user.avatar && (
+        {/* {user.avatar && (
           <Avatar size="large" src={user?.avatar} alt={user?.name} />
-        )}
+        )} */}
       </Space>
     </AntdLayout.Header>
   ) : null;

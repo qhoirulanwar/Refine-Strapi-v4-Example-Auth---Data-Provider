@@ -21,6 +21,9 @@ import {
 } from "components/layout";
 import { authProvider, axiosInstance } from "./authProvider";
 import { API_URL } from "./constants";
+import { PostCreate, PostEdit, PostList } from "pages/posts";
+import { CategoryCreate, CategoryEdit, CategoryList } from "pages/categories";
+import { UsersList } from "pages/users";
 
 function App() {
   return (
@@ -28,9 +31,7 @@ function App() {
       notificationProvider={notificationProvider}
       ReadyPage={ReadyPage}
       catchAll={<ErrorComponent />}
-      routerProvider={routerProvider}
       authProvider={authProvider}
-      dataProvider={DataProvider(API_URL + `/api`, axiosInstance)}
       LoginPage={AuthPage}
       Title={Title}
       Header={Header}
@@ -38,6 +39,26 @@ function App() {
       Footer={Footer}
       Layout={Layout}
       OffLayoutArea={OffLayoutArea}
+      dataProvider={DataProvider(API_URL + `/api`, axiosInstance)}
+      routerProvider={routerProvider}
+      resources={[
+        {
+          name: "posts",
+          list: PostList,
+          create: PostCreate,
+          edit: PostEdit,
+        },
+        {
+          name: "categories",
+          list: CategoryList,
+          create: CategoryCreate,
+          edit: CategoryEdit,
+        },
+        {
+          name: "users",
+          list: UsersList,
+        },
+      ]}
     />
   );
 }
