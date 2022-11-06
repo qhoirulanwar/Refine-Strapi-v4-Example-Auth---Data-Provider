@@ -19,6 +19,7 @@ import {
     Tag,
     Input,
     Icons,
+    Button,
 } from "@pankod/refine-antd";
 
 import { IPost } from "interfaces";
@@ -62,12 +63,18 @@ export const PostList: React.FC<IResourceComponentsProps> = () => {
         metaData: { locale },
     });
 
+    const flexJustifySpaceStyle = {
+        display: 'flex',
+        'justify-content': 'space-between',
+    };
+
     return (
         <List>
             <Form
                 layout="inline"
                 initialValues={{ locale, publicationState, }}
                 {...searchFormProps}
+                style={flexJustifySpaceStyle}
             >
                 <Form.Item label="Locale" name="locale">
                     <Radio.Group onChange={(e) => setLocale(e.target.value)}>
@@ -83,12 +90,19 @@ export const PostList: React.FC<IResourceComponentsProps> = () => {
                         </Radio.Button>
                     </Radio.Group>
                 </Form.Item>
-                <Form.Item label="Search" name="title">
-                    <Input
-                        placeholder="Title"
-                        prefix={<Icons.SearchOutlined />}
-                    />
-                </Form.Item>
+                <div style={flexJustifySpaceStyle}>
+                    <Form.Item name="title">
+                        <Input
+                            placeholder="Title"
+                            prefix={<Icons.SearchOutlined />}
+                        />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button htmlType="submit" type="primary">
+                            Search
+                        </Button>
+                    </Form.Item>
+                </div>
             </Form>
             <br />
             <Table
@@ -146,7 +160,7 @@ export const PostList: React.FC<IResourceComponentsProps> = () => {
                         );
                     }}
                 />
-                <Table.Column
+                {/* <Table.Column
                     dataIndex={"cover"}
                     align="center"
                     title="Cover"
@@ -163,7 +177,7 @@ export const PostList: React.FC<IResourceComponentsProps> = () => {
                             <span>---</span>
                         );
                     }}
-                />
+                /> */}
                 <Table.Column<{ id: string }>
                     title="Actions"
                     dataIndex="actions"
