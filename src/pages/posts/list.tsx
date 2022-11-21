@@ -65,7 +65,7 @@ export const PostList: React.FC<IResourceComponentsProps> = () => {
 
     const flexJustifySpaceStyle = {
         display: 'flex',
-        'justify-content': 'space-between',
+        justifyContent: 'space-between',
     };
 
     return (
